@@ -12,15 +12,15 @@ function App() {
     localStorage.setItem('activites', JSON.stringify(state.activites))
   }, [state.activites])
 
-  const conRestarApp = () => useMemo(() => state.activites.length, [state.activites])
+  const useConRestarApp = () => useMemo(() => state.activites.length>0, [state.activites])
   return (
     <>
       <header className=" bg-lime-600 py-3">
-        <div className=" max-w-4xl mx-auto flex justify-between">
+        <div className=" max-w-4xl mx-auto flex justify-between items-center">
           <h1 className=" text-center text-lg font-bold uppercase text-white">Contador de Calorias</h1>
           <button className=" mx-3 bg-gray-800 hover:bg-gray-900 p-2 font-bold uppercase text-white 
               cursor-pointer text-sm rounded-lg disabled:opacity-10"
-            disabled={!conRestarApp()}
+            disabled={!useConRestarApp()}
             onClick={() => dispatch({ type: 'restart-app' })}
           >Reinciar App</button>
         </div>
@@ -32,7 +32,7 @@ function App() {
       </section>
       <section className=" bg-gray-800 py-10">
         <div className=" max-w-4xl mx-auto">
-            <CalorieTracker/>
+            <CalorieTracker activites={state.activites}/>
         </div>
       </section>
       <section className=" p-10 mx-auto max-w-4xl">
